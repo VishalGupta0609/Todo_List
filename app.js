@@ -45,7 +45,6 @@ app.listen(port,function(){
 
 app.get("/",function(req,res){
     
-    let day = date.getDate();
     Item.find({}).then(function(items){
         
         if(items.length==0)
@@ -58,7 +57,7 @@ app.get("/",function(req,res){
             res.redirect("/");
         }
         else{
-            res.render("list",{listTitle:day,newListItems : items});
+            res.render("list",{listTitle:"Today",newListItems : items});
         }
 
     }).catch(function(err){
@@ -98,13 +97,12 @@ app.post("/",function(req,res){
 
     const itemName = req.body.newItem;
     const listName = req.body.list;
-    const day = date.getDate();
 
     const item = new Item({
         name : itemName
     });
 
-    if(listName == day)
+    if(listName == "Today")
     {
         item.save();
         res.redirect("/");
@@ -125,9 +123,8 @@ app.post("/delete",function(req,res)
 {
     const checkedItemId = req.body.checkbox;
     const listName = req.body.listName;
-    const day = date.getDate();
 
-    if(listName == day)
+    if(listName == "Today")
     {
         Item.findByIdAndRemove(checkedItemId).then(function(){
             console.log("Wow Deleted !!");
