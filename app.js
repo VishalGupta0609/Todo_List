@@ -7,7 +7,7 @@ mongoose.connect("mongodb+srv://VishalGupta96644:CSAN2371@vishalcluster.tvkjxkj.
     
 
 const app = express();
-
+const port = 3000 || process.env.PORT;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended : true}));
@@ -38,7 +38,7 @@ const listSchema = new mongoose.Schema({
 const List = mongoose.model("List",listSchema);
 
 
-app.listen(3000,function(){
+app.listen(port,function(){
     console.log("Server Started !!");
 })
 
