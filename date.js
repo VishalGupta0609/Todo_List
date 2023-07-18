@@ -10,7 +10,7 @@ module.exports.getDate = function getDate(){
         month : "long"
     };
 
-    let day= tdate.toLocaleDateString("en-US",options);
+    let day= tdate.toLocaleDateString("en-IN",options,{timeZone: "Asia/Calcutta"});
     return day;
 
  }
